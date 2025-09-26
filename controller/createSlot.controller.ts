@@ -23,7 +23,7 @@ export async function createSlotController(req:Request,res:Response) {
     const userId = req.userId
     try {
         const slotExists = await timeSlot.findOne({userId,email,type:'birthday'})
-        if (slotExists){
+        if (slotExists && type == 'birthday'){
             return res.status(409).json({message:'Duplicate slots not allowed',success:false})
         }
         const newSlot = new timeSlot({userId, name,email,type,eventDate,relationship})

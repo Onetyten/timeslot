@@ -28,8 +28,7 @@ export async function createUser(req:Request,res:Response) {
         console.log(`User ${user.name} created`)
         const payload = {
             name:savedUser.name,
-            email:savedUser.email,
-            password:savedUser.password
+            email:savedUser.email
         }
         return res.status(201).json({message:`User ${user.name} created`,data:payload,success:true})
     }

@@ -16,7 +16,7 @@ async function Authorization(req:Request,res:Response,next:NextFunction){
     if (!authHeader.startsWith("Bearer ")){
         return res.status(401).json({message:`Invalid authorization format, request to ${req.originalUrl} not authorized`,success:false})
     }
-    const token  = authHeader.split("")[1]
+    const token  = authHeader.split(" ")[1]
     try {
         const decoded = Jwt.verify(token,secret )
         if (typeof decoded === "string"){
