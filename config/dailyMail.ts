@@ -100,5 +100,4 @@ export async function dailyCron() {
             console.error(error)
         }
 })
-    
 }

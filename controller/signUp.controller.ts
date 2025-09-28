@@ -23,7 +23,7 @@ export async function createUser(req:Request,res:Response) {
     try {
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password,salt)
-        const user = new userProfile({name,email,password:hashedPassword})
+        const user = new userProfile({name:name.toLowerCase(),email:email.toLowerCase(),password:hashedPassword})
         const savedUser = await user.save()
         console.log(`User ${user.name} created`)
         const payload = {
@@ -36,8 +36,8 @@ export async function createUser(req:Request,res:Response) {
     catch (error) {
         console.log("error creating profile",error)
         if (error instanceof MongoServerError &&  error.code === 11000){
-            return res.status(500).json({message:`Email already exists, please log in`,error})
+            return res.status(500).json({message:`Email already exists, please log in`,error,success:false})
         }
-        return res.status(500).json({message:`Error creating profile, please try again`,error})
+        return res.status(500).json({message:`Error creating profile, please try again`,error,success:false})
     }
 }

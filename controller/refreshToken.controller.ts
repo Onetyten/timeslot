@@ -4,8 +4,6 @@ import jwt from "jsonwebtoken";
 import mongoConnect from "../config/mongoConnect";
 
 
-
-
 export async function refreshAccessToken(req:Request,res:Response) {
 
     const secret = process.env.JWT_SECRET
@@ -35,6 +33,7 @@ export async function refreshAccessToken(req:Request,res:Response) {
         const token = jwt.sign(payload,secret,{expiresIn:'6h'})
         return res.status(200).json({message:"New token Assigned",data:token,success:true})
     } catch (error) {
+        console.log("An unexpected error occurred while refreshing tokens. Please try again later.")
         res.status(500).json({message:"An unexpected error occurred. Please try again later.",error,success:false})
     }
 }

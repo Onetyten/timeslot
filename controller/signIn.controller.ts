@@ -29,30 +29,33 @@ export async function signInController(req:Request,res:Response) {
     const {email,password} = value
 
     try {
-        const user = await userProfile.findOne({email})
+        const user = await userProfile.findOne({email:email.toLowerCase()})
         if (!user){
             console.log(`user ${email} does not exist`)
-            return res.status(404).json({message:"This user does not exist, sign up to create a timeslot account"})
+            return res.status(404).json({message:"This user does not exist, sign up to create a timeslot account",success:false})
         }
         const match = await bcrypt.compare(password,user.password)
         if (!match){
             console.log(`user ${email} password incorrect`)
-            return res.status(400).json({message:"Incorrect password"})
+            return res.status(400).json({message:"Incorrect password",success:false})
         }
         const payload = {id:user._id}
         const refreshToken = crypto.randomBytes(40).toString('hex')
         const expiresAt = new Date(Date.now()+ 1000 * 60 * 60 * 24 * 30)
         const token = jwt.sign(payload,secret,{expiresIn:'6h'})
         user.refreshToken.push({token:refreshToken,expiresAt})
-        const {password:_pw, ...safeUser} = user.toObject()
         await user.save()
+        const userPayload = {
+            _id:user._id,
+            name:user.name,
+            email:user.email,
+            refreshToken
+        }
         console.log(`user ${user.name} signed in`)
-        return res.status(200).json({message:`Signed in, welcome ${user.name}`,data:safeUser,token,success:true})
+        return res.status(200).json({message:`Signed in, welcome ${user.name}`,data:userPayload,token,success:true})
     }
-
     catch (error) {
        console.log(error)
        return res.status(500).json({message:"Internal server error", error:error instanceof Error? error.message:"Unknown error",success:false}) 
     }
-    
 }

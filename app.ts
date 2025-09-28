@@ -38,6 +38,9 @@ app.use('/slot',createSlotRoute)
 app.use('/slot',fetchSlotRoute)
 app.use('/slot',deleteSlotRoute)
 
+app.get('/hello',(req:Request,res:Response)=>{
+    res.status(200).json({message:'hello'})
+})
 
 app.get(/.*/,(req,res)=>{
     res.sendFile(path.join(__dirname,"client","dist","index.html"))

@@ -13,6 +13,33 @@
 
 }
 
+body{
+  background-color: #121212;
+  color: #ffffff;
+  font-family:"Inconsolata", monospace;
+}
+
+.spotlight{
+  --border-width: 2px;
+  --spot:radial-gradient(
+    circle at var(--x) var(--y),#fafafa62,transparent 150px
+  );
+  background-attachment: fixed;
+}
+
+.spotlight::before{
+  content: '';
+  background: var(--spot),#252525;
+  mask: 
+  linear-gradient(#fff,#fff) 50% 0 / 100% var(--border-width) no-repeat,
+  linear-gradient(#fff,#fff) 100% 0 / var(--border-width) 100% no-repeat,
+  linear-gradient(#fff,#fff) 50% 100% / 100% var(--border-width) no-repeat,
+  linear-gradient(#fff,#fff) 0 0 / var(--border-width) 100% no-repeat;
+  mask-repeat: no-repeat;
+  background-attachment: fixed;
+  border-radius: inherit;
+}
+
 @theme inline{
   --font-console: "Inconsolata", monospace;
   --color-primary: var(--primary);

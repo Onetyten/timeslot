@@ -6,10 +6,14 @@ import timeSlot from "../schema/slot.schema";
 
 const slotJoiSchema = Joi.object({
     name :Joi.string().required(),
-    email : Joi.string().email().required(),
-    type: Joi.string().valid('birthday','event'),
+    email: Joi.when('type', {
+        is: 'birthday',
+        then: Joi.string().email().required(),
+        otherwise: Joi.string().optional().allow("")
+    }),
+    type: Joi.string().valid('birthday','event').required(),
     eventDate: Joi.date().greater('now').required(),
-    relationship:Joi.string().optional()
+    relationship:Joi.string().optional().allow("")
 })
 
 export async function createSlotController(req:Request,res:Response) {

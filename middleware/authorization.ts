@@ -27,7 +27,7 @@ async function Authorization(req:Request,res:Response,next:NextFunction){
     } catch (error) {
         console.log(error)
         if (error instanceof TokenExpiredError){
-            return res.status(401).json({message:`Access token expired, please refresh`,error,success:false})
+            return res.status(401).json({message:`Access token expired, please refresh`,error:"TokenExpiredError", code: "TOKEN_EXPIRED",success:false})
         }
         else{
             return res.status(401).json({message:`Error during authorization: ${error instanceof Error? error.message:""}`,error:error})
