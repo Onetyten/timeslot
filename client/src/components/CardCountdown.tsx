@@ -37,7 +37,14 @@ function getCountdown(targetDate: Date) {
 
   return `${years}y ${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
-export default function CardCountdown({ targetDate }: { targetDate: Date }) {
+
+interface propType{
+  targetDate: Date,
+  displayedSlotIndex:number
+}
+
+export default function CardCountdown(props:propType) {
+  const {displayedSlotIndex,targetDate } = props
   const [timeLeft, setTimeLeft] = useState(getCountdown(targetDate));
   const [scrambled, setScrambled] = useState(true);
 
@@ -54,7 +61,7 @@ export default function CardCountdown({ targetDate }: { targetDate: Date }) {
     setTimeout(()=>{
         setScrambled(false)
     },800)
-  },[])
+  },[displayedSlotIndex])
 
   return (
     <div className="text-sm sm:text-base">

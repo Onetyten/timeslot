@@ -56,7 +56,7 @@ export default function Dashboard() {
   return (
         <main className='w-screen h-screen bg-background flex items-center flex-col gap-4 text-border-muted'>
             <NavBar slotTypes={slotTypes} setShowAddForm={setShowAddForm} displayedSlotIndex={displayedSlotIndex} setDisplayedSlotIndex={setDisplayedSlotIndex} />
-            <SlotGrid slotList={slotList} slotTypes ={slotTypes} displayedSlotIndex={displayedSlotIndex} setSlotList={setSlotList} slotLoading={slotLoading} />
+            <SlotGrid slotList={slotList}  slotTypes ={slotTypes} displayedSlotIndex={displayedSlotIndex} setSlotList={setSlotList} slotLoading={slotLoading} />
             {showAddForm&&<NewSlotForm setShowAddForm={setShowAddForm} slotTypes={slotTypes} setSlotList={setSlotList} displayedSlotIndex={displayedSlotIndex} setDisplayedSlotIndex={setDisplayedSlotIndex} />}
         </main> 
   )

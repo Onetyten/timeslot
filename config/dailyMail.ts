@@ -13,6 +13,7 @@ export async function dailyCron() {
     const emailService = process.env.EMAIL_SERVICE
     const emailUser = process.env.EMAIL_USER
     const emailPass = process.env.EMAIL_PASSWORD
+    const oneYear = 365 * 24 * 60 * 60 * 1000
     if (!emailService || !emailUser || ! emailPass){
         throw new Error("Email credentials not found in the .env file")
     }
@@ -57,7 +58,7 @@ export async function dailyCron() {
                     mailOptions = {
                         from:`${sender.name} <${emailUser}>`,
                         to: slot.email,
-                        subject:`Happy birthday ${slot.name} 🥳`,
+                        subject:``,
                         text:`Hi ${slot.name},
 
                         ${sender.name} wanted to wish you the happiest of birthdays today! 🥳🎂✨  
@@ -84,17 +85,23 @@ export async function dailyCron() {
                     Set up by: ${sender.name}  
 
                     We hope everything goes smoothly and you enjoy this occasion!
-
                     Best regards,  
                     Timeslot Reminder Service`,
                 }
             }
-            return transporter.sendMail(mailOptions)
+             const result = await transporter.sendMail(mailOptions)
+             console.log("Message sent: ",result)
+             if (slot.type=='birthday'){
+                slot.eventDate = new Date(slot.eventDate.getTime() + oneYear)
+                await slot.save()
+             }
+             else{
+                await timeSlot.findByIdAndDelete(slot._id)
+             }
+             return result
 
         })
-        const sentMails = await Promise.all(emailPromises)
-        sentMails.forEach(mail => console.log("Message Sent", mail));
-
+            await Promise.all(emailPromises)
         } 
         catch (error) {
             console.error(error)

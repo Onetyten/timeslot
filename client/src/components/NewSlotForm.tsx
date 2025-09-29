@@ -12,6 +12,8 @@ import { slotJoiSchema } from '../../validation/userInputValidate'
 import api from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
 import type { slotType } from '../../types/types'
+import Eventslot from './Eventslot'
+import Birthdayslot from './Birthdayslot'
 
 
 interface propTypes{
@@ -86,7 +88,7 @@ export default function NewSlotForm(props:propTypes) {
 
 
   return (
-    <div className='fixed flex justify-center text-white items-center w-screen h-screen bg-background/70 backdrop-blur-sm'>
+    <div className='fixed flex justify-center text-white items-center w-screen h-screen bg-background/70 z-50 backdrop-blur-sm'>
         <SpotlightBorder className="w-full sm:w-[90%] relative max-w-[800px] h-[500px] flex text-sm">
             <div className="flex-1 p-4 h-full flex flex-col text-sm justify-between items-center">
                 <div className="flex flex-col gap-1 items-center">
@@ -170,9 +172,10 @@ export default function NewSlotForm(props:propTypes) {
                 </div>
             </div> 
 
-            <div className="flex-1 h-full bg-background hidden md:flex flex-col text-sm justify-between items-center">
-
+            <div className="flex-1 justify-center items-center h-full bg-background hidden md:flex flex-col text-sm">
+                {type=="event"?(<Eventslot name={name} eventDate={eventDate} />):(<Birthdayslot name={name} email={email} relationship={relationship}  eventDate={eventDate}/>)}
             </div>
+
             <IoClose onClick={()=>{setShowAddForm(false)}} className='absolute right-3 top-3 text-2xl hover:text-primary'/>
             
         </SpotlightBorder>

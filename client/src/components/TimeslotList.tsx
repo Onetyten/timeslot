@@ -17,11 +17,12 @@ import { SlEvent } from "react-icons/sl";
 interface propType{
     slot:slotType
     index:number,
-    setSlotList:React.Dispatch<React.SetStateAction<slotType[]>>
+    setSlotList:React.Dispatch<React.SetStateAction<slotType[]>>,
+    displayedSlotIndex:number
 }
 
 export default function TimeslotList(props:propType) {
-    const {slot,setSlotList} = props
+    const {slot,setSlotList,displayedSlotIndex} = props
     const [showOpts,setShowOpts] = useState(false)
     const [isdeleting,setIsDeleting] = useState(false)
     async function HandleDelete(){
@@ -113,7 +114,7 @@ export default function TimeslotList(props:propType) {
                 </div>
             </div>
         <div className="flex w-full justify-center items-center bg-primary/20 p-2 text-primary rounded-md">
-            <CardCountdown targetDate={new Date(slot.eventDate)} />
+            <CardCountdown displayedSlotIndex={displayedSlotIndex} targetDate={new Date(slot.eventDate)} />
         </div>
     </SpotlightBorder>
   )
