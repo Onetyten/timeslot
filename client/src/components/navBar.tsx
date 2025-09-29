@@ -16,15 +16,15 @@ export default function NavBar(props:propTypes) {
 
 
   return (
-    <div className='w-full sticky h-14 flex justify-between items-center border-b border-border-muted px-3'>
-            <div className='capitalize text-xl text-white max-w-20'>
+    <div className='w-full sticky h-14 flex justify-between items-center border-b border-border-muted px-6'>
+            <div className='capitalize text-3xl text-white max-w-20'>
             <TextScramble texts={[user?.name||"Name"]} letterSpeed={40} nextLetterSpeed={60} pauseTime={2000}/>
             </div>
             
             <div className='bg-box flex overflow-hidden rounded-sm'>
             {slotTypes.map((item,index)=>{
                 return(
-                <div onClick={()=>{setDisplayedSlotIndex(index)}} className={`cursor-pointer capitalize p-2 px-6 ${index==displayedSlotIndex?"bg-primary text-background":""}`} key={index}>
+                <div onClick={()=>{setDisplayedSlotIndex(index)}} className={`cursor-pointer capitalize p-1 px-4 w-28 text-center ${index==displayedSlotIndex?"bg-primary text-background":""}`} key={index}>
                     {item}s
                 </div>
                 )

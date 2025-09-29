@@ -11,7 +11,7 @@ export async function fetchSlotController(req:Request,res:Response) {
     try {
         const timeSlots = await timeSlot.find({userId})
         if (timeSlots.length === 0){
-            return res.status(200).json({message:"No timeslots found",success:false})
+            return res.status(200).json({message:"No timeslots found",success:true})
         }
         return res.status(200).json({message:"Timeslots fetched",data:timeSlots, success:true})
     }

@@ -11,6 +11,7 @@ import axios from 'axios'
 import { slotJoiSchema } from '../../validation/userInputValidate'
 import api from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
+import type { slotType } from '../../types/types'
 
 
 interface propTypes{
@@ -18,12 +19,13 @@ interface propTypes{
     setDisplayedSlotIndex: React.Dispatch<React.SetStateAction<number>>,
     displayedSlotIndex:number
     setShowAddForm: React.Dispatch<React.SetStateAction<boolean>> ,
+    setSlotList:React.Dispatch<React.SetStateAction<slotType[]>>,
 }
 
     const oneYear = 365 * 24 * 60 * 60 * 1000
 
 export default function NewSlotForm(props:propTypes) {
-    const {slotTypes,setDisplayedSlotIndex,setShowAddForm,displayedSlotIndex} = props
+    const {slotTypes,setDisplayedSlotIndex,setShowAddForm,setSlotList,displayedSlotIndex} = props
     const [isloading,setIsLoading] = useState(false)
     const [name,setName] = useState("")
     const [email,setEmail] = useState("")
@@ -58,6 +60,7 @@ export default function NewSlotForm(props:propTypes) {
                 toast.error(response.data.message)
                 return console.log(response.data)
             }
+            setSlotList(prev => [response.data.data, ...(prev || [])])
             console.log(response.data.data)
             if (type=='event'){
                 setDisplayedSlotIndex(1)
@@ -83,7 +86,7 @@ export default function NewSlotForm(props:propTypes) {
 
 
   return (
-    <div className='fixed flex justify-center text-white items-center w-screen h-screen bg-background/70'>
+    <div className='fixed flex justify-center text-white items-center w-screen h-screen bg-background/70 backdrop-blur-sm'>
         <SpotlightBorder className="w-[90%] relative max-w-[800px] h-[500px] flex text-sm">
             <div className="flex-1 p-4 h-full flex flex-col text-sm justify-between items-center">
                 <div className="flex flex-col gap-1 items-center">

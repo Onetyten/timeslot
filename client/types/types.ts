@@ -9,3 +9,17 @@ export interface profileInterface{
 export interface userState {
     user:profileInterface|null
 }
+
+export interface slotType{
+  _id:string,
+  userId: string,
+  name: string,
+  email: string,
+  type: string,
+  eventDate: Date,
+  relationship: string,
+  createdAt: Date,
+  updatedAt: Date,
+  __v: number
+
+}
