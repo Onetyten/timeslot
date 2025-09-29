@@ -22,11 +22,10 @@ body{
 .spotlight{
   --border-width: 2px;
   --spot:radial-gradient(
-    circle at var(--x) var(--y),#fafafa62,transparent 150px
+    circle at var(--x) var(--y),#fafafaa6,transparent 180px
   );
   background-attachment: fixed;
 }
-
 .spotlight::before{
   content: '';
   background: var(--spot),#252525;
@@ -50,5 +49,19 @@ body{
   --color-muted: var(--muted);
   --color-border-muted: var(--border-muted);
   --color-border-active: var(--border-active);
+  --breakpoint-xs:360px;
+  --breakpoint-xxs:300px;
 
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+* {
+  -ms-overflow-style: none;
 }

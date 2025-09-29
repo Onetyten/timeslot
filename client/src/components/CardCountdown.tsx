@@ -50,18 +50,19 @@ export default function CardCountdown({ targetDate }: { targetDate: Date }) {
   }, [targetDate]);
 
   useEffect(()=>{
+    setScrambled(true)
     setTimeout(()=>{
         setScrambled(false)
     },800)
   },[])
-  return scrambled ? (
-    <TextScramble
-      texts={[timeLeft]}
-      letterSpeed={30}
-      nextLetterSpeed={30}
-      pauseTime={1500}
-    />
-  ) : (
-    <span>{timeLeft}</span>
-  );
+
+  return (
+    <div className="text-sm sm:text-base">
+      {scrambled ? (
+        <TextScramble texts={[timeLeft]} letterSpeed={30} nextLetterSpeed={30} pauseTime={1500}/>
+      ) : (
+        <span>{timeLeft}</span>
+      )}
+    </div>
+  )
 }

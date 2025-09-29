@@ -48,17 +48,17 @@ export default function SignUp(prop:propType) {
 
 
   return (
-    <SpotlightBorder className="w-md h-[500px] p-4 flex flex-col text-sm justify-between items-center">
+    <SpotlightBorder className="w-full m-2 sm:m-0 sm:w-md h-[500px] p-4 flex flex-col text-sm justify-between items-center">
         <div className="flex flex-col gap-1 items-center">
 
-            <div className="text-xl flex gap-2 font-semibold"> <TextScramble texts={['Welcome to']} letterSpeed={30} nextLetterSpeed={30}/> <span className="text-primary"><TextScramble texts={['Timeslot']} letterSpeed={30} nextLetterSpeed={30}/></span></div>
+            <div className="text-xl flex gap-2 text-nowrap font-semibold"> <TextScramble texts={['Welcome to']} letterSpeed={30} nextLetterSpeed={30}/> <span className="text-primary"><TextScramble texts={['Timeslot']} letterSpeed={30} nextLetterSpeed={30}/></span></div>
             <div className="text-sm w-full text-center">
                 <TextScramble texts={['The perfect birthday gift.','Never forget a special day again.','Save life’s most important moments.','Celebrate automatically with thoughtful emails.','Celebrate effortlessly, let us do the remembering.','Stay connected through every milestone.']} letterSpeed={30} nextLetterSpeed={10} pauseTime={4000} />
             </div>
             <div className="flex flex-col mt-3 gap-2 items-center">
-                <input type='text' value={name} placeholder="Name" onChange={(e)=>{setName(e.target.value)}} className="w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
-                <input type='email' value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}} className="w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
-                <input type='password' value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder="Password" className="w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
+                <input type='text' value={name} placeholder="Name" onChange={(e)=>{setName(e.target.value)}} className="w-full xxs:w-72 md:w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
+                <input type='email' value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}} className="w-full xxs:w-72 md:w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
+                <input type='password' value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder="Password" className="w-full xxs:w-72 md:w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
             </div>
 
         </div>
@@ -72,7 +72,7 @@ export default function SignUp(prop:propType) {
                 </div>
                 )}
             </button>
-            <div className="mt-2 flex gap-2 text-sm">
+            <div className="mt-2 text-nowrap flex gap-2 text-sm">
                 <TextScramble texts={[`Have an account already?`]} letterSpeed={30} nextLetterSpeed={30}/>
                 <span className="cursor-pointer hover:text-primary-100 text-primary" onClick={()=>{setAuthState('signin')}}>
                     <TextScramble texts={[`sign in`]} letterSpeed={30} nextLetterSpeed={30}/>

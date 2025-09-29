@@ -11,10 +11,10 @@ async function Authorization(req:Request,res:Response,next:NextFunction){
     }
     const authHeader = req.headers.authorization
     if (!authHeader){
-        return res.status(401).json({message:`Authorization header not found, request to ${req.originalUrl} not authorized`,success:false})
+        return res.status(401).json({message:`Sign in or create an account`,success:false})
     }
     if (!authHeader.startsWith("Bearer ")){
-        return res.status(401).json({message:`Invalid authorization format, request to ${req.originalUrl} not authorized`,success:false})
+        return res.status(401).json({message:`Sign in or create an account`,success:false})
     }
     const token  = authHeader.split(" ")[1]
     try {

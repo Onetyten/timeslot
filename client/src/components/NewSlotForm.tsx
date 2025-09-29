@@ -87,22 +87,28 @@ export default function NewSlotForm(props:propTypes) {
 
   return (
     <div className='fixed flex justify-center text-white items-center w-screen h-screen bg-background/70 backdrop-blur-sm'>
-        <SpotlightBorder className="w-[90%] relative max-w-[800px] h-[500px] flex text-sm">
+        <SpotlightBorder className="w-full sm:w-[90%] relative max-w-[800px] h-[500px] flex text-sm">
             <div className="flex-1 p-4 h-full flex flex-col text-sm justify-between items-center">
                 <div className="flex flex-col gap-1 items-center">
 
-                    <div className="text-xl flex gap-2 font-semibold"> <TextScramble texts={['Create a']} letterSpeed={30} nextLetterSpeed={30}/> <span className="text-primary"><TextScramble texts={['Timeslot']} letterSpeed={30} nextLetterSpeed={30}/></span></div>
+                    <div className="text-xl flex gap-2 font-semibold mt-6 text-nowrap sm:mt-0"> <TextScramble texts={['Create a']} letterSpeed={30} nextLetterSpeed={30}/> <span className="text-primary"><TextScramble texts={['Timeslot']} letterSpeed={30} nextLetterSpeed={30}/></span></div>
                     <div className="text-sm w-full text-center">
                         <TextScramble key={type} texts={[type=='event'?'Get email notifications about your upcoming events.':'Automatically send birthday emails to your selected contacts.']} letterSpeed={3} nextLetterSpeed={3} pauseTime={4000} />
                     </div>
+                    
                     <div className="flex flex-col mt-3 gap-2 items-center">
-                        <input type='text' placeholder={`${type=='birthday'?'Recipient name':'Event title'}`} value={name} onChange={(e)=>{setName(e.target.value)}} className="w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
+                        <input type='text' placeholder={`${type=='birthday'?'Recipient name':'Event title'}`} value={name} onChange={(e)=>{setName(e.target.value)}} className="w-full xxs:w-72 md:w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
+
                         {type=='birthday'&&(
-                            <input type='email' value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='Recipient email' className="w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
+                            <input type='text' value={relationship} onChange={(e)=>{setRelationship(e.target.value)}} placeholder="Relationship to recipient" className="w-full xxs:w-72 md:w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
+                        )}
+                        
+                        {type=='birthday'&&(
+                            <input type='email' value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='Recipient email' className="w-full xxs:w-72 md:w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
                         )}
 
-                        <div className='h-10 flex justify-between w-full items-center gap-2'>
-                            <div className='flex-1 w-1/2 p-2 border border-muted h-full flex gap-2 items-center'>
+                        <div className='flex flex-col sm:flex-row h-10 justify-between w-full items-center gap-2'>
+                            <div className='flex-1 w-full sm:w-1/2 p-2 border border-muted h-full flex gap-2 items-center'>
                                 <button type="button" className='text-2xl cursor-pointer' >
                                     <CiCalendar onClick={() => dateInputRef.current?.showPicker()} />
                                 </button>
@@ -127,7 +133,7 @@ export default function NewSlotForm(props:propTypes) {
                             </div>
                             
                             <Listbox value={type} onChange={setType} >
-                                <div className='relative w-1/2 border border-muted h-full focus:outline-0'>
+                                <div className='relative w-full sm:translate-y-0 sm:w-1/2 border border-muted h-10 focus:outline-0'>
                                     <ListboxButton className='w-full h-full flex justify-between items-center p-2 capitalize'>
                                         {type}
                                         <IoChevronDownSharp className='ml-2' />
@@ -146,9 +152,7 @@ export default function NewSlotForm(props:propTypes) {
                                 </div>
                             </Listbox>
                         </div>
-                        {type=='birthday'&&(
-                            <input type='text' value={relationship} onChange={(e)=>{setRelationship(e.target.value)}} placeholder="Relationship to recipient" className="w-80 h-10 border border-muted focus:border-border-active focus:outline-0 p-3" />
-                        )}
+
                         
                         
                     </div>
@@ -166,7 +170,7 @@ export default function NewSlotForm(props:propTypes) {
                 </div>
             </div> 
 
-            <div className="flex-1 h-full bg-background flex flex-col text-sm justify-between items-center">
+            <div className="flex-1 h-full bg-background hidden md:flex flex-col text-sm justify-between items-center">
 
             </div>
             <IoClose onClick={()=>{setShowAddForm(false)}} className='absolute right-3 top-3 text-2xl hover:text-primary'/>
