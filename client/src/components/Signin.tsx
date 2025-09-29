@@ -26,16 +26,14 @@ export default function Signin(prop:propType) {
     async function handleSignIn() {
         const {error} = signinSchema.validate({email,password})
         if (error){
-            toast(error.message)
-            return console.log(error.message)
+            return toast(error.message)
         }
         if (isloading) return
         setIsLoading(true)
         try {
             const response = await api.post('/user/signin',{email,password})
             if (response.data.success == false){
-                toast.error(response.data.message)
-                return console.log(response.data)
+                return toast.error(response.data.message)
             }
             dispatch(setUser(response.data.data))
             dispatch(setToken(response.data.token))
@@ -44,7 +42,6 @@ export default function Signin(prop:propType) {
         catch (error) {
             if (axios.isAxiosError(error)){
                 toast(error.response?.data.message)
-                console.log(error.response?.data.message)
             }
         }
         finally{

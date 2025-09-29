@@ -46,8 +46,7 @@ export default function NewSlotForm(props:propTypes) {
         if(isloading) return
         const {error} = slotJoiSchema.validate({name,email,type,eventDate,relationship})
         if (error){
-            toast(error.message)
-            return console.log(error.message)
+           return toast(error.message)
         }
         setIsLoading(true)
         try {
@@ -59,11 +58,9 @@ export default function NewSlotForm(props:propTypes) {
                 response = await  api.post('/slot/create',{name,email,type,eventDate,relationship})
             }
             if (response.data.success == false){
-                toast.error(response.data.message)
-                return console.log(response.data)
+                return toast.error(response.data.message)
             }
             setSlotList(prev => [response.data.data, ...(prev || [])])
-            console.log(response.data.data)
             if (type=='event'){
                 setDisplayedSlotIndex(1)
             }
@@ -74,7 +71,6 @@ export default function NewSlotForm(props:propTypes) {
         catch (error) {
             if (axios.isAxiosError(error)){
                 toast(error.response?.data.message)
-                console.log(error.response?.data.message)
             }
         }
         finally{

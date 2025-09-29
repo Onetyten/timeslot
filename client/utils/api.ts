@@ -6,11 +6,13 @@ import { clearUser } from '../state/userSlice'
 import { clearToken, setToken } from '../state/tokenSlice'
 
 
-const api = axios.create({
-    // @ts-ignore
-    baseURL: import.meta.env.VITE_BASE_URL
-})
+const baseURL =
+     // @ts-ignore
+  import.meta.env.MODE === "development"?"http://localhost:3210": ""; 
 
+const api = axios.create({
+  baseURL,
+});
 declare module 'axios' {
   export interface AxiosRequestConfig {
     _retry?: boolean
@@ -62,8 +64,8 @@ api.interceptors.response.use(
             originalRequest._retry = true
 
             try {
-                // @ts-ignore
-                const res = await axios.post(`${(import.meta).env.VITE_BASE_URL}/user/token/session`,{refreshToken:store.getState().user.user?.refreshToken})
+
+                const res = await axios.post(`${baseURL}/user/token/session`,{ refreshToken: store.getState().user.user?.refreshToken })
                 const newToken = res.data.token
                 store.dispatch(setToken(newToken))
                 processQueue(null,newToken)

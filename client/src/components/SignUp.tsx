@@ -21,8 +21,7 @@ export default function SignUp(prop:propType) {
     async function handleSignUp() {
         const {error} = signupSchema.validate({name,email,password})
         if (error){
-            toast(error.message)
-            return console.log(error.message)
+            return toast(error.message)
         }
         if (isloading) return
         setIsLoading(true)
@@ -30,13 +29,12 @@ export default function SignUp(prop:propType) {
             const response = await api.post('/user/signup',{name,email,password})
 
             if (response.data.success == false){
-                toast.error(response.data.message)
-                return console.log(response.data.message)
+                return toast.error(response.data.message)
             }
             return toast.success(`Time slot account created, proceed to signin page`)
         }
         catch (error) {
-            console.log(error)
+            console.error(error)
         }
         finally{
             setIsLoading(false)

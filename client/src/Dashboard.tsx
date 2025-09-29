@@ -40,7 +40,7 @@ export default function Dashboard() {
         catch (error) {
           if (axios.isAxiosError(error)){
               toast(error.response?.data.message)
-              console.log(error.response?.data.message)
+             
           }
         }
         finally{
