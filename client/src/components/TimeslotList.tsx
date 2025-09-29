@@ -82,8 +82,8 @@ export default function TimeslotList(props:propType) {
 
                 <div className='capitalize flex text-xs sm:text-sm flex-col justify-center gap-2 h-full'>
                     {slot.type=='birthday'&&(
-                        <div className='flex gap-1'>
-                            <p className='text-muted'>Email:</p>
+                        <div className='flex gap-1 lowercase'>
+                            <p className='text-muted capitalize'>Email:</p>
                                 {slot.email.length<32?(
                                     <p className='text-wrap'> {slot.email}</p>
                                     ):(
