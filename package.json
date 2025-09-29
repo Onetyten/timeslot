@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --exec ts-node app.ts",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json && cd client && npm install && npm run build",
     "start": "node app.js",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
