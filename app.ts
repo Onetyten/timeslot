@@ -1,5 +1,4 @@
-import dotenv from "dotenv"
-dotenv.config()
+
 import express, { Request, Response } from "express"
 import cors from "cors"
 import path from "path"
@@ -59,7 +58,6 @@ async function startServer() {
             {
                 console.log(`timeslot has runn into an error: ${error}`)
             }
-            
         })
     } 
     catch (error) {
