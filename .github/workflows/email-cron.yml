@@ -2,9 +2,8 @@ name: Timeslot Daily Emails
 
 on:
   schedule:
-    - cron: "* * * * *"  
+    - cron: "*/5 * * * *"
   workflow_dispatch:     
-
 jobs:
   send-emails:
     runs-on: ubuntu-latest
