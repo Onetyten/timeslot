@@ -26,4 +26,5 @@ jobs:
           EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          MONGO_STRING: ${{ secrets.MONGO_STRING }}
         run: node dist/config/dailyMail.js
