@@ -7,7 +7,6 @@ import { TbDots } from "react-icons/tb";
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import api from '../../utils/api';
 import { CiUser } from "react-icons/ci";
 import { SlEvent } from "react-icons/sl";
@@ -27,21 +26,12 @@ export default function TimeslotList(props:propType) {
     const [isdeleting,setIsDeleting] = useState(false)
     async function HandleDelete(){
         setIsDeleting(true)
-        try {
-            const response = await api.delete(`/slot/delete/${slot._id}`)
-            if (response.data.success == false){
-                return toast.error(response.data.message)
-            }
-            setSlotList(prev=>prev.filter(s=>s._id !== slot._id))
+        const response = await api.delete(`/slot/delete/${slot._id}`)
+        if (response.data.success == false){
+            return toast.error(response.data.message)
         }
-        catch (error) {
-            if (axios.isAxiosError(error)){
-                toast(error.response?.data.message)
-            }
-        }
-        finally{
-            setIsDeleting(false)
-        }
+        setSlotList(prev=>prev.filter(s=>s._id !== slot._id))
+        setIsDeleting(false)
     }
     
   return (

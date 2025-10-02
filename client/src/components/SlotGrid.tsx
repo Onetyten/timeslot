@@ -13,21 +13,23 @@ interface propType{
 export default function SlotGrid(props:propType) {
     
     const {slotList,slotLoading,setSlotList,displayedSlotIndex} = props
-    if (slotLoading){
-        return(
-            <div className="w-full mt-6 justify-center items-center gap-2 flex flex-col">
-                <p>Loading Timeslots</p>
-                <p className="animate-spin text-2xl text-primary"> / </p>
-            </div>
-        )
+    if (slotLoading) {
+    return (
+        <div className="w-full mt-6 justify-center items-center gap-2 flex flex-col">
+        <p>Loading Timeslots</p>
+        <p className="animate-spin text-2xl text-primary"> / </p>
+        </div>
+    )
     }
-    if (!slotLoading && slotList.length==0){
-        return(
-            <div className="w-full mt-6 justify-center items-center gap-4 flex">
-                <p>No timeslot available, create a timeslot</p>
-            </div>
-        )
+
+    if (!slotLoading && (!slotList || slotList.length === 0)) {
+    return (
+        <div className="w-full mt-6 justify-center items-center gap-4 flex">
+        <p>No timeslot available, create a timeslot</p>
+        </div>
+    )
     }
+
     const birthdaySlots = slotList.filter(slot=>slot.type=='birthday')
     const eventSlots= slotList.filter(slot=>slot.type=='event')
   return (

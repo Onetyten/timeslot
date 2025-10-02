@@ -12,7 +12,7 @@ import deleteSlotRoute from './routes/slot/delete.route'
 import Authorization from "./middleware/authorization"
 import { dailyCron } from "./config/dailyMail"
 
-
+const rootDir =__dirname.includes("dist") ? path.join(__dirname, "..") : __dirname;
 
 declare module "express-serve-static-core"{
     interface Request{
@@ -25,9 +25,9 @@ const app = express()
 app.use(cors({origin:"*"}))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname,"client","dist")))
+app.use(express.static(path.join(rootDir, "client", "dist")));
 
-dailyCron()
+
 
 app.use('/user', createUserRoute)
 app.use('/user', signInRoute)
@@ -41,15 +41,16 @@ app.get('/hello',(req:Request,res:Response)=>{
     res.status(200).json({message:'hello'})
 })
 
-app.get(/.*/,(req,res)=>{
-    res.sendFile(path.join(__dirname,"client","dist","index.html"))
-})
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(rootDir, "client", "dist", "index.html"));
+});
 
 async function startServer() {
     try {
         console.log("connecting to db")
         await mongoConnect()
         console.log("connected to db")
+        // dailyCron()
         app.listen(port,(error)=>{
             if (!error){
                 console.log(`timeslot running on port ${port}`)

@@ -1,0 +1,29 @@
+name: Timeslot Daily Emails
+
+on:
+  schedule:
+    - cron: "* * * * *"  
+  workflow_dispatch:     
+
+jobs:
+  send-emails:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run daily cron script
+        env:
+          EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: node dist/config/dailyMail.js
